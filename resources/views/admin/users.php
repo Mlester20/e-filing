@@ -137,6 +137,8 @@ allowOnly(['admin']);
             </div>
         </div>
     </div>
+
+    <div class="card mt-4">
         <h5 class="card-header">Manage Users</h5>
         <div class="table-responsive nowrap">
             <table class="table">
@@ -168,7 +170,6 @@ allowOnly(['admin']);
             </table>
         </div>
     </div>
-
 
     <?php require_once __DIR__ . '/partials/footer.php'; ?>
     
