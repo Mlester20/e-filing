@@ -21,7 +21,7 @@
                 <div class="avatar avatar-online">
                     <?php
                       $profile_pic = !empty($_SESSION['profile_picture'])
-                          ? htmlspecialchars($_SESSION['profile_picture'])
+                          ? '../../../' . htmlspecialchars($_SESSION['profile_picture'])
                           : '../../../public/assets/img/avatars/1.png';
                     ?>
                     <img
@@ -39,7 +39,7 @@
                         <div class="avatar avatar-online">
                         <?php
                           $profile_pic = !empty($_SESSION['profile_picture'])
-                            ? htmlspecialchars($_SESSION['profile_picture'])
+                            ? '../../../' . htmlspecialchars($_SESSION['profile_picture'])
                             : '../../../public/assets/img/avatars/1.png';
                         ?>
                         <img

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateProfileModel = new UpdateProfileModel($con);
     
     $userId = $_SESSION['id'];
-    $name = trim($_POST['full_name'] ?? '');
+    $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $currentPassword = $_POST['current_password'] ?? '';
     $newPassword = $_POST['new_password'] ?? '';
@@ -37,18 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Email is already in use by another account.';
     }
 
+    // Current password is required for ANY profile changes (security)
+    if (empty($currentPassword)) {
+        $errors[] = 'Current password is required to make any changes.';
+    } else {
+        // Verify current password
+        $userPassword = $updateProfileModel->getUserPassword($userId);
+        if (!$updateProfileModel->verifyPassword($currentPassword, $userPassword)) {
+            $errors[] = 'Current password is incorrect.';
+        }
+    }
+
     // Password validation (only if changing password)
     if (!empty($newPassword) || !empty($confirmPassword)) {
-        if (empty($currentPassword)) {
-            $errors[] = 'Current password is required to change password.';
-        } else {
-            // Verify current password
-            $userPassword = $updateProfileModel->getUserPassword($userId);
-            if (!$updateProfileModel->verifyPassword($currentPassword, $userPassword)) {
-                $errors[] = 'Current password is incorrect.';
-            }
-        }
-
         if (empty($newPassword)) {
             $errors[] = 'New password is required.';
         } elseif (strlen($newPassword) < 8) {
@@ -96,11 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Generate unique filename
         $fileExtension = pathinfo($_FILES['profile_pic']['name'], PATHINFO_EXTENSION);
-        $fileName = 'pfp_' . $userId . time() . '.' . $fileExtension;
+        $fileName = 'pfp_' . $userId . '_' . time() . '.' . $fileExtension;
         $uploadPath = $uploadDir . $fileName;
 
         if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $uploadPath)) {
-            $profilePicturePath = '../../../storage/profiles/' . $fileName;
+            // Store path relative to project root for consistency
+            $profilePicturePath = 'storage/profiles/' . $fileName;
         } else {
             setFlash('error', 'Failed to upload profile picture.');
             header("Location: " . $_SERVER['HTTP_REFERER']);
@@ -111,9 +113,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Update profile
     $passwordToUpdate = !empty($newPassword) ? $newPassword : null;
     if ($updateProfileModel->updateProfile($userId, $name, $email, $passwordToUpdate)) {
+        // Update session variables immediately to reflect changes
+        $_SESSION['name'] = $name;
+        $_SESSION['email'] = $email;
+
         // Update profile picture if uploaded
         if ($profilePicturePath) {
             $updateProfileModel->updateProfilePicture($userId, $profilePicturePath);
+            // Store relative path for session (will be resolved by views)
             $_SESSION['profile_picture'] = $profilePicturePath;
         }
 

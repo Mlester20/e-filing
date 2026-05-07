@@ -1,0 +1,294 @@
+/* ============================================================
+   E-Filing System — Navbar Stylesheet
+   Designed for: Registrar Office Use
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ── CSS Variables ────────────────────────────────────────── */
+:root {
+  --nav-bg:           #1a2235;
+  --nav-border:       #2e3f5c;
+  --nav-accent:       #3b7dd8;
+  --nav-accent-light: #5b9ef0;
+  --nav-text:         #c8d4e8;
+  --nav-text-muted:   #7a90b0;
+  --nav-hover-bg:     rgba(59, 125, 216, 0.10);
+  --nav-active-bg:    rgba(59, 125, 216, 0.18);
+  --nav-active-text:  #ffffff;
+  --nav-dropdown-bg:  #1e2d44;
+  --nav-dropdown-border: #2e3f5c;
+  --badge-danger:     #d94f4f;
+  --badge-text:       #ffffff;
+  --font-ui:          'DM Sans', sans-serif;
+  --font-brand:       'Source Serif 4', serif;
+  --transition:       150ms ease;
+}
+
+/* ── Base Reset ───────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Navbar Shell ─────────────────────────────────────────── */
+.navbar {
+  font-family: var(--font-ui);
+  background-color: var(--nav-bg) !important;
+  border-bottom: 1px solid var(--nav-border);
+  padding: 0 1rem;
+  min-height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.30);
+}
+
+/* ── Brand ────────────────────────────────────────────────── */
+.navbar-brand {
+  font-family: var(--font-brand);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff !important;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  transition: opacity var(--transition);
+}
+
+.navbar-brand:hover {
+  opacity: 0.88;
+}
+
+.navbar-brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: var(--nav-accent);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.navbar-brand-text {
+  font-size: 0.95rem;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* ── Nav Links ────────────────────────────────────────────── */
+.navbar-nav .nav-link {
+  font-family: var(--font-ui);
+  font-size: 0.845rem;
+  font-weight: 500;
+  color: var(--nav-text) !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px;
+  margin: 0 1px;
+  transition: background-color var(--transition), color var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: var(--nav-hover-bg);
+  color: var(--nav-active-text) !important;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: var(--nav-active-bg);
+  color: var(--nav-active-text) !important;
+  font-weight: 600;
+}
+
+.navbar-nav .nav-link i {
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+/* Remove Bootstrap dropdown arrow color override */
+.navbar-nav .nav-link.dropdown-toggle::after {
+  border-top-color: var(--nav-text-muted);
+}
+.navbar-nav .nav-link.dropdown-toggle:hover::after {
+  border-top-color: #ffffff;
+}
+
+/* ── Dropdown Menus ───────────────────────────────────────── */
+.dropdown-menu {
+  background-color: var(--nav-dropdown-bg) !important;
+  border: 1px solid var(--nav-dropdown-border) !important;
+  border-radius: 8px !important;
+  padding: 0.35rem 0;
+  margin-top: 6px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  min-width: 185px;
+  animation: dropIn 120ms ease forwards;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  font-family: var(--font-ui);
+  font-size: 0.835rem;
+  font-weight: 400;
+  color: var(--nav-text) !important;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0;
+  transition: background-color var(--transition), color var(--transition);
+  text-decoration: none;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--nav-hover-bg) !important;
+  color: #ffffff !important;
+}
+
+.dropdown-item.text-danger {
+  color: #e07070 !important;
+}
+.dropdown-item.text-danger:hover {
+  background-color: rgba(217, 79, 79, 0.12) !important;
+  color: #ff8a8a !important;
+}
+
+.dropdown-item i {
+  font-size: 0.9rem;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.dropdown-header {
+  font-family: var(--font-ui);
+  font-size: 0.70rem;
+  font-weight: 600;
+  color: var(--nav-text-muted) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 1rem 0.25rem;
+}
+
+.dropdown-divider {
+  border-color: var(--nav-dropdown-border) !important;
+  margin: 0.3rem 0;
+}
+
+/* ── Badges ───────────────────────────────────────────────── */
+.badge.bg-danger {
+  background-color: var(--badge-danger) !important;
+  color: var(--badge-text);
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.2em 0.5em;
+  border-radius: 99px;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+/* Notification bell badge */
+.nav-link .badge.rounded-pill {
+  font-size: 0.60rem;
+  min-width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* ── User Profile Toggle ──────────────────────────────────── */
+.user-profile-toggle {
+  padding: 0.35rem 0.65rem !important;
+}
+
+.user-profile-toggle img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--nav-border);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.user-profile-toggle:hover img {
+  border-color: var(--nav-accent);
+}
+
+/* ── Toggler (Mobile) ─────────────────────────────────────── */
+.navbar-toggler {
+  border: 1px solid var(--nav-border) !important;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 2px rgba(59, 125, 216, 0.35);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(200,212,232,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* ── Notifications Icon ───────────────────────────────────── */
+.nav-item .nav-link .bi-bell {
+  font-size: 1rem;
+  display: block;
+}
+
+/* ── Responsive Adjustments ───────────────────────────────── */
+@media (max-width: 991.98px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-collapse {
+    background-color: var(--nav-bg);
+    border-top: 1px solid var(--nav-border);
+    padding: 0.5rem 0;
+    margin-top: 0.25rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.55rem 0.75rem !important;
+    border-radius: 6px;
+    margin: 1px 0;
+  }
+
+  .dropdown-menu {
+    background-color: rgba(255,255,255,0.04) !important;
+    border: none !important;
+    box-shadow: none;
+    margin-top: 0 !important;
+    padding-left: 0.75rem;
+    animation: none;
+  }
+
+  .dropdown-item {
+    border-radius: 6px;
+    margin: 1px 0;
+  }
+
+  .navbar-nav .nav-link.user-profile-toggle span {
+    display: inline !important;
+  }
+}

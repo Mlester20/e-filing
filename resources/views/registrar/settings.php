@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../../helpers/message.php';
 require_once __DIR__ . '/../../../app/models/UpdateProfileModel.php';
 require_once __DIR__ . '/../../../database/config/config.php';
 
-allowOnly(['admin']); 
+allowOnly(['registrar']); 
 
 // Get user profile data
 $updateProfileModel = new UpdateProfileModel($con);
@@ -26,6 +26,12 @@ $memberSince = $userProfile['created_at'] ? date('M d, Y', strtotime($userProfil
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="../../../public/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- Registrar App CSS (Navbar) -->
+    <link rel="stylesheet" href="../../../public/css/registrar/app.css">
     <link rel="stylesheet" href="../../../public/assets/vendor/fonts/iconify-icons.css" />
     <link rel="stylesheet" href="../../../public/assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="../../../public/assets/vendor/css/core.css" />
@@ -38,12 +44,11 @@ $memberSince = $userProfile['created_at'] ? date('M d, Y', strtotime($userProfil
 </head>
 <body>
 
-    <?php require_once __DIR__ . '/partials/sidebar.php'; ?>
-    <?php require_once __DIR__ . '/partials/topbar.php'; ?>
+    <?php require_once __DIR__ . '/partials/navbar.php'; ?>
 
-    <!-- Main content -->
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Account /</span> Profile Settings</h4>
+    <!-- Main content with proper spacing -->
+    <div class="container-xxl flex-grow-1 container-p-y" style="margin-top: 20px;">
+        <h4 class="py-3 mb-4 text-center"><span class="text-muted fw-light">Account /</span> Profile Settings</h4>
 
         <!-- Display flash messages -->
         <?php showFlash(); ?>
@@ -192,13 +197,13 @@ $memberSince = $userProfile['created_at'] ? date('M d, Y', strtotime($userProfil
             </div>
         </div>
     </div>
-
-    <?php require_once __DIR__ . '/partials/footer.php'; ?>
+    
+    <!-- ── Bootstrap 5 Bundle ── -->
+    <script src="../../../public/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- ── Vendor scripts ── -->
     <script src="../../../public/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="../../../public/assets/vendor/libs/popper/popper.js"></script>
-    <script src="../../../public/assets/vendor/js/bootstrap.js"></script>
     <script src="../../../public/assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="../../../public/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="../../../public/assets/vendor/js/menu.js"></script>
@@ -228,6 +233,12 @@ $memberSince = $userProfile['created_at'] ? date('M d, Y', strtotime($userProfil
                 reader.readAsDataURL(file);
             }
         }
+
+        // Initialize Bootstrap tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
     </script>
 </body>
 </html>

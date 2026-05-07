@@ -57,15 +57,15 @@ allowOnly(['admin']);  //only admin should allowed to access this page
                         <!-- Name Fields -->
                         <div class="col-md-4">
                             <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            <input type="text" class="form-control" id="first_name" name="first_name" required placeholder="E.g. , Juan">
                         </div>
                         <div class="col-md-4">
                             <label for="middle_name" class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" id="middle_name" name="middle_name">
+                            <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="E.g. , Dela Cruz">
                         </div>
                         <div class="col-md-4">
                             <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="E.g. , Santos">
                         </div>
 
                         <!-- Suffix & Sex -->
@@ -85,7 +85,14 @@ allowOnly(['admin']);  //only admin should allowed to access this page
                         <!-- Year Section & Academic Year -->
                         <div class="col-md-6">
                             <label for="year_section" class="form-label">Year & Section</label>
-                            <input type="text" class="form-control" id="year_section" name="year_section" required>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="year_section" 
+                                name="year_section" 
+                                placeholder="e.g., Grade 6 - Einstein" 
+                                required
+                            >
                         </div>
                         <div class="col-md-6">
                             <label for="academic_year" class="form-label">Academic Year</label>
@@ -95,7 +102,7 @@ allowOnly(['admin']);  //only admin should allowed to access this page
                         <!-- Graduated Date -->
                         <div class="col-12">
                             <label for="graduated_date" class="form-label">Graduated Date</label>
-                            <input type="date" class="form-control" id="graduation_date" name="graduation_date" required>
+                            <input type="date" class="form-control" id="graduation_date" name="graduated_date" required>
                         </div>
 
                         <!-- Diploma No. & Form 137 No. -->
@@ -255,7 +262,7 @@ allowOnly(['admin']);  //only admin should allowed to access this page
                         <!-- Graduated Date -->
                         <div class="col-12">
                             <label for="edit_graduation_date" class="form-label">Graduated Date</label>
-                            <input type="date" class="form-control" id="edit_graduation_date" name="graduation_date" required>
+                            <input type="date" class="form-control" id="edit_graduation_date" name="graduated_date" required>
                         </div>
 
                         <!-- Diploma No. & Form 137 No. -->
